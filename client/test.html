@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chat Input</title>
+  <style>
+    .chat-input-container {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+    }
+
+    .chat-input {
+      flex: 1;
+      border: none;
+      padding: 8px;
+      font-size: 16px;
+      outline: none; /* Remove input field outline */
+    }
+
+    .icon-button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      margin-left: 10px;
+    }
+
+    .icon-button:focus {
+      outline: none; /* Remove button outline */
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="chat-input-container">
+    <input type="text" class="chat-input" placeholder="Type your message...">
+    <button class="icon-button" onclick="sendMessage()">
+      <i class="fas fa-paper-plane"></i></button> 
+    <input type="file" id="fileInput" style="display: none;"> 
+    <button class="icon-button" onclick="uploadFile()">
+      <i class="fas fa-paperclip"></i></button> 
+  </div>
+
+  <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js"></script> <script>
+    function sendMessage() {
+      // Get message from input field
+      const messageInput = document.querySelector('.chat-input');
+      const message = messageInput.value.trim();
+
+      if (message !== "") {
+        // TODO: Send message to your chatbot's backend
+        console.log("Sending message:", message); 
+
+        // Clear the input field
+        messageInput.value = '';
+      }
+    }
+
+    function uploadFile() {
+      const fileInput = document.getElementById('fileInput');
+      fileInput.click(); 
+    }
+
+    // Handle file selection
+    fileInput.addEventListener('change', (event) => {
+      const file = event.target.files[0];
+
+      // TODO: Upload file to server or process it 
+      console.log("Selected file:", file);
+    });
+  </script>
+
+</body>
+</html>
