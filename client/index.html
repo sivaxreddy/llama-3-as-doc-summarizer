@@ -4,34 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style.css">
-  <script src="script.js"></script>
-  <title>doc Analyzer</title>
-  
+  <script defer src="script.js"></script>
+  <title>LLM Chat Interface</title>
 </head>
 <body>
-  <canvas id="gameCanvas"></canvas>
-  
-  <div class="controls">
-    <input type="text" id="textInput" placeholder="Type your message here">
-    <button onclick="sendMessage()">Send</button>
-    <input type="file" id="fileInput" onchange="uploadFile()">
-    <label for="fileInput">Upload Document</label>
+  <div id="chatContainer" class="chat-container">
+    <div id="chatBox" class="chat-box">
+      <!-- Chat messages will be displayed here -->
+    </div>
+    <div class="controls">
+      <input type="text" id="textInput" placeholder="Type your message here">
+      <button onclick="sendMessage()">Send</button>
+      <input type="file" id="fileInput">
+      <label for="fileInput">Upload Document</label>
+    </div>
   </div>
-
-  
-  <script>
-    function sendMessage() {
-      const message = document.getElementById('textInput').value;
-      alert('Message sent: ' + message);
-      // Handle the message as needed, such as sending it to a server
-    }
-
-    function uploadFile() {
-      const fileInput = document.getElementById('fileInput');
-      const file = fileInput.files[0];
-      alert('File uploaded: ' + file.name);
-      // Handle the file as needed, such as uploading it to a server
-    }
-  </script>
 </body>
+</html>
 </html>
