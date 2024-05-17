@@ -1,89 +1,63 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #fff; /* default background color */
-  color: #000; /* default text color */
-}
-
-body.dark-mode {
-  background-color: #333; /* dark mode background color */
-  color: #fff; /* dark mode text color */
-}
-
-/* Add this to change text color to white in dark mode */
-body.dark-mode * {
-   body {
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  height: 100vh;
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #fff; /* default background color */
-  color: #000; /* default text color */
-}
-
-body.dark-mode {
-  background-color: #333; /* dark mode background color */
-  color: #121111; /* dark mode text color */
-}
-
-body.dark-mode .chat-container {
-  background-color: #444; /* dark mode chat container background color */
-  border: 1px solid #666; /* dark mode chat container border color */
-}
-
-body.dark-mode .chat-box {
-  border-bottom: 1px solid #666; /* dark mode chat box border color */
-}
-
-body.dark-mode .controls {
-  background-color: #444; /* dark mode controls background color */
-  border-top: 1px solid #666; /* dark mode controls border color */
-}
-
-body.dark-mode button, body.dark-mode label {
-  color: #121111; /* dark mode button and label text color */
-  background-color: #333; /* dark mode button and label background color */
-}
-
-.chat-container {
+  background-color: #fff;
+  color: #000;
   display: flex;
   flex-direction: column;
-  width: 80%;
+  align-items: center;
+  padding: 20px;
+}
+
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+button {
+  margin: 10px;
+  padding: 10px;
+}
+
+#response {
+  margin-top: 1cm; /* Adjust the margin to move the response bar closer to the "Choose File" button */
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 100%;
   max-width: 600px;
-  height: 80%;
-  background-color: #675c5c;
-  border: 1px solid #c58787;
-  border-radius: 8px;
-  overflow: hidden;
+  white-space: pre-wrap;
+  margin-bottom: 2cm; /* Increase the gap below the response element */
 }
 
-.chat-box {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  border-bottom: 1px solid #c03f3f;
+#chatForm {
+    margin-top: 2cm; /* Increase the gap above the chatForm element */
 }
 
-.controls {
-  display: flex;
-  padding: 10px;
-  background-color: #a09d9d;
-  border-top: 1px solid #ccc;
+#toggleDarkMode {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 12px;
+    border-radius: 5px; /* Make corners round */
+    font-weight: bold; /* Make font bold */
 }
 
-#textInput {
-  flex: 1;
-  padding: 5px;
-  margin-right: 10px;
-}
+@media only screen and (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
 
-button, label {
-  margin-left: 10px;
-}
+    #response {
+        margin-top: 50px;
+        margin-bottom: 1cm;
+    }
 
-/* Add this to change text color to white in dark mode */
-body.dark-mode * {
-  color: #fff; /* change text color to white in dark mode */
-}#fff; /* change text color to white in dark mode */
+    #chatForm {
+        margin-top: 0.5cm;
+    }
+
+    #toggleDarkMode {
+        top: 5px;
+        left: 5px;
+        font-size: 10px;
+    }
 }

@@ -1,56 +1,42 @@
 const express = require('express');
-const fileUpload = require('express-fileupload');
+const multer = require('multer');
 const pdfParse = require('pdf-parse');
 const axios = require('axios');
 const path = require('path');
-const { Groq } = require('groq-sdk');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const upload = multer({ dest: 'uploads/' });
 
-app.use(fileUpload());
-app.use(express.static(path.join(__dirname, '../client')));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'client')));
 
-let groqApiKey = process.env.GROQ_API_KEY;
-
-if (!groqApiKey) {
-    groqApiKey = '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';
-}
-
-const groqClient = new Groq({ apiKey: groqApiKey });
-
-app.post('/chat', async (req, res) => {
+// Endpoint to upload PDF and parse its text content
+app.post('/upload', upload.single('pdfFile'), async (req, res) => {
+    const pdfBuffer = req.file.buffer;
     try {
-        if (!req.files || !req.files.pdfFile) {
-            return res.status(400).send('No file uploaded.');
-        }
-
-        const pdfFile = req.files.pdfFile;
-        const data = await pdfParse(pdfFile.data);
-        const pdfText = data.text;
-
-        const userQuery = req.body.query;
-        const context = extractRelevantContext(pdfText, userQuery);
-
-        const response = await getGroqChatCompletion([
-            {
-                role: "user",
-                content: context + "\n\n" + userQuery
-            }
-        ], groqClient);
-
-        res.json({ response: response.choices[0]?.message?.content || "" });
+        const pdfData = await pdfParse(pdfBuffer);
+        const text = pdfData.text;
+        res.json({ text });
     } catch (error) {
-        res.status(500).send(error.toString());
+        res.status(500).json({ error: 'Error parsing PDF' });
     }
 });
 
-function extractRelevantContext(pdfText, userQuery) {
-    // Simple extraction logic - you might want to improve this
-    return pdfText.substring(0, 1000); // Extract the first 1000 characters for context
-}
+// Endpoint to ask a question about the PDF content using the LLM API
+app.post('/ask', async (req, res) => {
+    const { text, question } = req.body;
+    try {
+        const response = await axios.post('YOUR_LLM_API_URL', {
+            text,
+            question
+        });
+        res.json(response.data);
+    } catch (error) {
+        res.status(500).json({ error: 'Error querying LLM API' });
+    }
+});
 
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
