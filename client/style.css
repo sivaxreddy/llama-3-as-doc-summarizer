@@ -81,7 +81,6 @@ body.dark-mode button, body.dark-mode label {
 button, label {
   margin-left: 10px;
 }
-
 /* Add this to change text color to white in dark mode */
 body.dark-mode * {
   color: #fff; /* change text color to white in dark mode */
