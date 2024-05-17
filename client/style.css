@@ -10,7 +10,7 @@ body.dark-mode {
 }
 
 /* Add this to change text color to white in dark mode */
-body.dark-mode * {
+body.dark-mode * 
    body {
   display: flex;
   justify-content: center;
@@ -85,5 +85,4 @@ button, label {
 /* Add this to change text color to white in dark mode */
 body.dark-mode * {
   color: #fff; /* change text color to white in dark mode */
-}#fff; /* change text color to white in dark mode */
 }
