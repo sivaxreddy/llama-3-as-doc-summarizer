@@ -4,7 +4,7 @@ const fs = require('fs');
 
 // Replace with your LLM API details
 const LLM_API_KEY = process.env.LLM_API_KEY;
-const LLM_API_URL = 'https://api.example.com/v1/analyze'; // Your API endpoint
+const LLM_API_URL = 'https://api.groq.com/v1/analyze'; // Your LLM API endpoint
 
 async function processDocument(filePath) {
   try {

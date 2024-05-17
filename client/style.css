@@ -6,6 +6,12 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
+  body.dark-mode #textInput,
+body.dark-mode button,
+body.dark-mode label {
+  color: #fff; /* Set text color to white */
+  background-color: #333; /* Set background color to dark gray */
+}
 }
 
 .chat-container {
