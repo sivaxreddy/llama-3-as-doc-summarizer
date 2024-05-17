@@ -1,122 +1,45 @@
-"use strict";
-const Groq = require("groq-sdk");
-const groq = new Groq();
-const schema = {
-    $defs: {
-        Ingredient: {
-            properties: {
-                name: {
-                    title: "Name",
-                    type: "string"
-                },
-                quantity: {
-                    title: "Quantity",
-                    type: "string"
-                },
-                quantity_unit: {
-                    anyOf: [
-                        {
-                            type: "string"
-                        },
-                        {
-                            type: "null"
-                        }
-                    ],
-                    title: "Quantity Unit"
-                }
-            },
-            required: [
-                "name",
-                "quantity",
-                "quantity_unit"
-            ],
-            title: "Ingredient",
-            type: "object"
-        }
-    },
-    properties: {
-        recipe_name: {
-            title: "Recipe Name",
-            type: "string"
-        },
-        ingredients: {
-            items: {
-                $ref: "#/$defs/Ingredient"
-            },
-            title: "Ingredients",
-            type: "array"
-        },
-        directions: {
-            items: {
-                type: "string"
-            },
-            title: "Directions",
-            type: "array"
-        }
-    },
-    required: [
-        "recipe_name",
-        "ingredients",
-        "directions"
-    ],
-    title: "Recipe",
-    type: "object"
-};
-class Ingredient {
-    constructor(name, quantity, quantity_unit){
-        this.name = name;
-        this.quantity = quantity;
-        this.quantity_unit = quantity_unit || null;
-    }
+{
+  "name": "doc-analyzer-with-llama-3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "abort-controller": "^3.0.0",
+    "agentkeepalive": "^4.5.0",
+    "asynckit": "^0.4.0",
+    "axios": "^1.6.8",
+    "base-64": "^0.1.0",
+    "charenc": "^0.0.2",
+    "combined-stream": "^1.0.8",
+    "crypt": "^0.0.2",
+    "delayed-stream": "^1.0.0",
+    "digest-fetch": "^1.3.0",
+    "event-target-shim": "^5.0.1",
+    "express": "^4.19.2",
+    "file-upload": "^0.0.0",
+    "form-data": "^4.0.0",
+    "form-data-encoder": "^1.7.2",
+    "formdata-node": "^4.4.1",
+    "groq-sdk": "^0.3.3",
+    "humanize-ms": "^1.2.1",
+    "is-buffer": "^1.1.6",
+    "md5": "^2.3.0",
+    "mime-db": "^1.52.0",
+    "mime-types": "^2.1.35",
+    "ms": "^2.1.3",
+    "node-domexception": "^1.0.0",
+    "node-fetch": "^2.7.0",
+    "pdf-parse": "^1.1.1",
+    "tr46": "^0.0.3",
+    "undici-types": "^5.26.5",
+    "web-streams-polyfill": "^3.3.3",
+    "webidl-conversions": "^3.0.1",
+    "whatwg-url": "^5.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
-class Recipe {
-    constructor(recipe_name, ingredients, directions){
-        this.recipe_name = recipe_name;
-        this.ingredients = ingredients;
-        this.directions = directions;
-    }
-}
-async function getRecipe(recipe_name) {
-    // Pretty printing improves completion results.
-    jsonSchema = JSON.stringify(schema, null, 4);
-    const chat_completion = await groq.chat.completions.create({
-        messages: [
-            {
-                role: "system",
-                content: `You are a recipe database that outputs recipes in JSON.\n'The JSON object must use the schema: ${jsonSchema}`
-            },
-            {
-                role: "user",
-                content: `Fetch a recipe for ${recipe_name}`
-            }
-        ],
-        model: "llama3-8b-8192",
-        temperature: 0,
-        stream: false,
-        response_format: {
-            type: "json_object"
-        }
-    });
-    return Object.assign(new Recipe(), JSON.parse(chat_completion.choices[0].message.content));
-}
-function printRecipe(recipe) {
-    console.log("Recipe:", recipe.recipe_name);
-    console.log();
-    console.log("Ingredients:");
-    recipe.ingredients.forEach((ingredient)=>{
-        console.log(`- ${ingredient.name}: ${ingredient.quantity} ${ingredient.quantity_unit || ""}`);
-    });
-    console.log();
-    console.log("Directions:");
-    recipe.directions.forEach((direction, step)=>{
-        console.log(`${step + 1}. ${direction}`);
-    });
-}
-async function main() {
-    const recipe = await getRecipe("apple pie");
-    printRecipe(recipe);
-}
-module.exports = {
-    getRecipe,
-    main
-};

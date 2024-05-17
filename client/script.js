@@ -27,6 +27,7 @@ async function sendMessage() {
   }
 }
 
+// Function to handle file upload and processing for LLM API
 async function uploadFile() {
   const fileInput = document.getElementById('fileInput');
   const file = fileInput.files[0];
