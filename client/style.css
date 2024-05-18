@@ -1,51 +1,63 @@
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
-  body.dark-mode #textInput,
-body.dark-mode button,
-body.dark-mode label {
-  color: #fff; /* Set text color to white */
-  background-color: #333; /* Set background color to dark gray */
-}
-}
-
-.chat-container {
+  background-color: #fff;
+  color: #000;
   display: flex;
   flex-direction: column;
-  width: 80%;
-  max-width: 600px;
-  height: 80%;
-  background-color: #fff;
+  align-items: center;
+  padding: 20px;
+}
+
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+button {
+  margin: 10px;
+  padding: 10px;
+}
+
+#response {
+  margin-top: 1cm; /* Adjust the margin to move the response bar closer to the "Choose File" button */
+  padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
+  white-space: pre-wrap;
+  margin-bottom: 2cm; /* Increase the gap below the response element */
 }
 
-.chat-box {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  border-bottom: 1px solid #ccc;
+#chatForm {
+    margin-top: 2cm; /* Increase the gap above the chatForm element */
 }
 
-.controls {
-  display: flex;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-top: 1px solid #ccc;
+#toggleDarkMode {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 12px;
+    border-radius: 5px; /* Make corners round */
+    font-weight: bold; /* Make font bold */
 }
 
-#textInput {
-  flex: 1;
-  padding: 5px;
-  margin-right: 10px;
-}
+@media only screen and (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
 
-button, label {
-  margin-left: 10px;
+    #response {
+        margin-top: 50px;
+        margin-bottom: 1cm;
+    }
+
+    #chatForm {
+        margin-top: 0.5cm;
+    }
+
+    #toggleDarkMode {
+        top: 5px;
+        left: 5px;
+        font-size: 10px;
+    }
 }

@@ -1,3 +1,12 @@
+function toggleDarkMode() {
+  document.body.classList.toggle("dark-mode");
+  var toggleButton = document.getElementById("toggleDarkMode");
+  if (document.body.classList.contains("dark-mode")) {
+    toggleButton.textContent = "dark Mode";
+  } else { 
+    toggleButton.textContent = "light Mode";
+  }
+}
 document.getElementById('fileInput').addEventListener('change', uploadFile);
 
 async function sendMessage() {
