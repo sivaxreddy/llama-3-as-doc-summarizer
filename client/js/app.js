@@ -21,7 +21,7 @@ async function handleSubmit(event) {
     // Upload PDF and get text content
     let text;
     try {
-        const uploadResponse = await fetch('/upload', {
+        const uploadResponse = await fetch('https://api.groq.com/text', {
             method: 'POST',
             body: formData
         });
@@ -35,7 +35,7 @@ async function handleSubmit(event) {
 
     // Ask question to LLM API
     try {
-        const askResponse = await fetch('/ask', {
+        const askResponse = await fetch('https://api.groq.com/text', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

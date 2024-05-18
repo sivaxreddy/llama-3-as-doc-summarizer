@@ -7,9 +7,8 @@
     <title>PDF Chat</title>
 </head>
 <body>
-    <button id="toggleDarkMode" onclick="toggleDarkMode()">Dark Mode</button>
+    <button id="toggleDarkMode" onclick="toggleDarkMode()">Toggle Dark Mode</button>
     <h1>Chat with PDF</h1>
-    <div id="response"></div>
     <form id="chatForm">
         <label for="pdfFile">Select PDF:</label>
         <input type="file" id="pdfFile" name="pdfFile" accept="application/pdf" required><br><br>
@@ -17,12 +16,13 @@
         <input type="text" id="query" name="query" required><br><br>
         <button type="submit">Submit</button>
     </form>
+    <div id="response"></div>
 
     <script>
         function toggleDarkMode() {
             document.body.classList.toggle("dark-mode");
         }
     </script>
-    <script src="js/app.js"></script>
+    <script src="js/app.js"></script> <!-- Corrected path to js/app.js -->
 </body>
 </html>
