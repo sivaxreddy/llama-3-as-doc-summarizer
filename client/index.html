@@ -10,13 +10,14 @@
     <button id="toggleDarkMode" onclick="toggleDarkMode()">Toggle Dark Mode</button>
     <h1>Chat with PDF</h1>
     <form id="chatForm">
+        <div id="response"></div>
         <label for="pdfFile">Select PDF:</label>
         <input type="file" id="pdfFile" name="pdfFile" accept="application/pdf" required><br><br>
         <label for="query">Your Query:</label>
         <input type="text" id="query" name="query" required><br><br>
         <button type="submit">Submit</button>
     </form>
-    <div id="response"></div>
+    
 
     <script>
         function toggleDarkMode() {
