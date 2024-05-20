@@ -6,6 +6,8 @@ const fs = require('fs');
 const path = require('path');
 const cors = require('cors');  // Import cors package
 require('dotenv').config();
+const apiKey = process.env.API_KEY;
+
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
